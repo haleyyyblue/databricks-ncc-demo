@@ -225,6 +225,7 @@ output "databricks_ncc_info" {
     usage_guide                 = "Use this NCC in Databricks workspace creation for private MySQL connectivity"
     mysql_connection_pattern    = "Databricks → NCC → PrivateLink → NLB:3306 → EC2:3306 → RDS:3306"
     message                     = null
+    prerequisites               = []
   } : {
     ncc_enabled                  = false
     ncc_id                      = null
