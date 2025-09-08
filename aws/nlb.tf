@@ -158,18 +158,12 @@ resource "aws_vpc_endpoint_service" "mysql_privatelink" {
   })
 }
 
-# Allow specific principals to access the endpoint service
+# Allow specific principal to access the endpoint service
 resource "aws_vpc_endpoint_service_allowed_principal" "mysql_privatelink" {
-  count = var.enable_mysql_proxy && var.enable_nlb && var.enable_endpoint_service ? length(var.endpoint_service_allowed_principals) : 0
+  count = var.enable_mysql_proxy && var.enable_nlb && var.enable_endpoint_service && var.endpoint_service_allowed_principal != "" ? 1 : 0
 
   vpc_endpoint_service_id = aws_vpc_endpoint_service.mysql_privatelink[0].id
-  
-  # Replace region in ARN dynamically
-  principal_arn = replace(
-    var.endpoint_service_allowed_principals[count.index],
-    "ap-northeast-2",  # hardcoded region to replace
-    var.aws_region     # dynamic region variable
-  )
+  principal_arn = var.endpoint_service_allowed_principal
 
   depends_on = [
     aws_vpc_endpoint_service.mysql_privatelink

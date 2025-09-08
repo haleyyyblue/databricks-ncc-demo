@@ -70,9 +70,7 @@ nlb_allowed_cidrs = [
 
 # VPC Endpoint Service Configuration (PrivateLink)
 enable_endpoint_service = true  # Enable for cross-account/cross-VPC private access
-endpoint_service_allowed_principals = [
-  "arn:aws:iam::565502421330:role/private-connectivity-role-ap-northeast-2"  # Replace account ID as needed
-]
+endpoint_service_allowed_principal = "arn:aws:iam::565502421330:role/private-connectivity-role-ap-northeast-2"  # Replace account ID as needed
 
 # Databricks Network Connectivity Configuration (NCC)
 enable_databricks_ncc = false  # Set to true to enable Databricks NCC integration

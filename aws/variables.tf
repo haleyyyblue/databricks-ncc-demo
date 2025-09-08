@@ -197,17 +197,14 @@ variable "enable_endpoint_service" {
   default     = false
 }
 
-variable "endpoint_service_allowed_principals" {
-  description = "List of AWS principal ARNs allowed to access the endpoint service"
-  type        = list(string)
-  default     = []
+variable "endpoint_service_allowed_principal" {
+  description = "AWS principal ARN allowed to access the endpoint service"
+  type        = string
+  default     = ""
   
   validation {
-    condition = alltrue([
-      for principal in var.endpoint_service_allowed_principals : 
-      can(regex("^arn:aws:iam::", principal))
-    ])
-    error_message = "All principals must be valid AWS IAM ARNs starting with 'arn:aws:iam::'."
+    condition = var.endpoint_service_allowed_principal == "" || can(regex("^arn:aws:iam::", var.endpoint_service_allowed_principal))
+    error_message = "Principal must be a valid AWS IAM ARN starting with 'arn:aws:iam::' or empty string."
   }
 }
 

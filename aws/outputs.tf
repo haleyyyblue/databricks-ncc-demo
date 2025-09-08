@@ -169,7 +169,7 @@ output "endpoint_service_info" {
     service_id              = aws_vpc_endpoint_service.mysql_privatelink[0].id
     service_type            = aws_vpc_endpoint_service.mysql_privatelink[0].service_type
     acceptance_required     = aws_vpc_endpoint_service.mysql_privatelink[0].acceptance_required
-    allowed_principals      = var.endpoint_service_allowed_principals
+    allowed_principal       = var.endpoint_service_allowed_principal
     base_endpoint_dns_names = aws_vpc_endpoint_service.mysql_privatelink[0].base_endpoint_dns_names
     connection_guide        = "Create VPC endpoint in target account/VPC using service name above"
     access_pattern          = "Target VPC → VPC Endpoint → PrivateLink → NLB:3306 → EC2:3306 → RDS:3306"

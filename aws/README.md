@@ -449,9 +449,7 @@ enable_mysql_proxy      = true   # Enable MySQL proxy
 enable_nlb              = true   # NLB required for PrivateLink
 enable_nat_gateway      = true   # Internet access for setup
 enable_endpoint_service = true   # Enable PrivateLink
-endpoint_service_allowed_principals = [
-  "arn:aws:iam::123456789012:role/databricks-role"
-]
+endpoint_service_allowed_principal = "arn:aws:iam::123456789012:role/databricks-role"
 ```
 **✅ Pros:** Maximum security, cross-account access, enterprise-grade  
 **💰 Cons:** Highest cost, more complex setup
@@ -897,9 +895,7 @@ External Account/VPC → VPC Endpoint → PrivateLink → NLB:3306 → EC2:3306 
    enable_endpoint_service = true
    
    # Configure allowed AWS principals (replace account ID as needed)
-   endpoint_service_allowed_principals = [
-     "arn:aws:iam::565502421330:role/private-connectivity-role-ap-northeast-2"
-   ]
+endpoint_service_allowed_principal = "arn:aws:iam::565502421330:role/private-connectivity-role-ap-northeast-2"
    ```
 
 2. **Deploy** the infrastructure:
@@ -1288,7 +1284,7 @@ All key parameters are configurable through `terraform.tfvars`:
 | `enable_nlb` | Enable Network Load Balancer | `false` |
 | `nlb_allowed_cidrs` | NLB access IP ranges | `["10.0.0.0/16"]` |
 | `enable_endpoint_service` | Enable VPC Endpoint Service (PrivateLink) | `false` |
-| `endpoint_service_allowed_principals` | IAM principals allowed to access endpoint service | `[]` |
+| `endpoint_service_allowed_principal` | IAM principal allowed to access endpoint service | `""` |
 | `assign_public_ip_to_ec2` | Assign public IP to EC2 instance | `true` |
 | `enable_nat_gateway` | Enable NAT Gateway for internet access | `false` |
 
