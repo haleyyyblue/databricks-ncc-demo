@@ -69,4 +69,8 @@ locals {
   validate_databricks_credentials = var.enable_databricks_ncc && (var.databricks_client_id == "" || var.databricks_client_secret == "") ? (
     file("ERROR: Databricks NCC requires client credentials for authentication. Set databricks_client_id and databricks_client_secret in terraform.tfvars.")
   ) : null
+
+  validate_prefix_length = length(join("-", [var.project_name, var.environment])) >= 22 && var.enable_nlb ? (
+    file("ERROR: Too many characters for project_name and environment. NLB resources have character limitations")
+  ) : null
 }
