@@ -32,9 +32,9 @@ EC2 instance placement is configurable based on `assign_public_ip_to_ec2` variab
                         AWS VPC Infrastructure Overview
 +===========================================================================+
 |                            AWS Account (Current)                         |
-|                              VPC (10.0.0.0/16)                          |
+|                              VPC (10.0.0.0/16)                           |
 +===========================================================================+
-|                                                                           |
+|                                                                          |
 | +------------------+ +------------------+ +---------------------+        |
 | | Public Subnet    | | Private Subnet   | | Private Subnet      |        |
 | | (10.0.1.0/24)    | | RDS: 10.0.2.0/24 | | NLB: 10.0.4.0/24    |        |
@@ -47,9 +47,9 @@ EC2 instance placement is configurable based on `assign_public_ip_to_ec2` variab
 | |        |         | |        |         | |         |           |        |
 | |        v         | |        |         | |         |           |        |
 | | +------+------+  | |        |         | | +-------v--------+  |        |
-| | | EC2 Instance|<-+-+--------+         | | | VPC Endpoint    |  |        |
-| | | Web + Proxy |  | |  MySQL Connection | | | Service         |  |        |
-| | | :80, :3306  |  | |                  | | | (PrivateLink)   |  |        |
+| | | EC2 Instance|<-+-+--------+         | | | VPC Endpoint    | |        |
+| | | Web + Proxy |  | |  MySQL Connection| | | Service         | |        |
+| | | :80, :3306  |  | |                  | | | (PrivateLink)   | |        |
 | | +------^------+  | |                  | | +-------+---------+ |        |
 | |        |         | |                  | |         |           |        |
 | +--------+---------+ +------------------+ +---------+-----------+        |
@@ -65,17 +65,17 @@ EC2 instance placement is configurable based on `assign_public_ip_to_ec2` variab
 |                     External AWS Account                                 |
 |                         VPC (External)                                   |
 +=====================================================+===================+
-|                                                                           |
+|                                                                          |
 | +------------------+                    +---------------------+          |
 | | Private Subnet   |                    | VPC Endpoint        |          |
 | | (External VPC)   |                    | (Interface Type)    |          |
 | |                  |                    |                     |          |
 | | +-------------+  | <--mysql connect-- | +----------------+  |          |
-| | | Client      |  |                    | | VPC Endpoint |  |          |
-| | | Application |  |   mysql -h vpce... | | DNS Name     |  |          |
+| | | Client      |  |                    | | VPC Endpoint   |  |          |
+| | | Application |  |   mysql -h vpce... | | DNS Name       |  |          |
 | | +-------------+  |                    | +----------------+  |          |
 | +------------------+                    +---------------------+          |
-|                                                                           |
+|                                                                          |
 +===========================================================================+
 ```
 
@@ -85,7 +85,7 @@ EC2 instance placement is configurable based on `assign_public_ip_to_ec2` variab
 SCENARIO 1: DEVELOPMENT (assign_public_ip_to_ec2 = true)
 
 +---------------------------------------------------------------------+
-| Internet > IGW > Public Subnet (EC2) > Private Subnet (RDS)       |
+| Internet > IGW > Public Subnet (EC2) > Private Subnet (RDS)        |
 |                       |                        ^                   |
 |                  MySQL Proxy                   |                   |
 |                  Port 3306                     |                   |
