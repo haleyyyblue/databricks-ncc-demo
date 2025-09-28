@@ -632,7 +632,7 @@ terraform apply
 
 # Manual verification
 ssh -i key.pem ec2-user@[PUBLIC_IP]
-mysql -h [RDS_ENDPOINT] -u admin -p[PASSWORD] -e "SELECT COUNT(*) FROM test.hr;"
+mysql -h [RDS_ENDPOINT] -u admin -p[PASSWORD] -D test -e "SELECT COUNT(*) FROM test.hr;"
 ```
 
 **For Private Subnet:**
@@ -643,7 +643,7 @@ cat /var/log/db_init.log
 cat /var/log/setup.log
 
 # Verify database
-mysql -h [RDS_ENDPOINT] -u admin -p[PASSWORD] -e "SELECT COUNT(*) FROM test.hr;"
+mysql -h [RDS_ENDPOINT] -u admin -p[PASSWORD] -D test -e "SELECT COUNT(*) FROM test.hr;"
 ```
 
 ### Connecting to the Database
@@ -1099,7 +1099,7 @@ ssh ec2-user@[EC2_IP] "cat /tmp/terraform_db_init_*.log"
 
 # Manual verification
 mysql -h [RDS_ENDPOINT] -u admin -p[PASSWORD] -e "SHOW DATABASES;"
-mysql -h [RDS_ENDPOINT] -u admin -p[PASSWORD] -e "SELECT COUNT(*) FROM test.hr;"
+mysql -h [RDS_ENDPOINT] -u admin -p[PASSWORD] -D test -e "SELECT COUNT(*) FROM test.hr;"
 ```
 
 #### **Problem: MySQL client not installed**
