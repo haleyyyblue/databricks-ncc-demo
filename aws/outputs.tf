@@ -179,11 +179,11 @@ output "endpoint_service_info" {
     service_name            = null
     service_id              = null
     service_type            = null
-    acceptance_required     = null
-    allowed_principals      = null
+    acceptance_required     = false
+    allowed_principal       = null
     base_endpoint_dns_names = null
     connection_guide        = null
-    access_pattern          = null
+    access_pattern          = tostring(null)
     message                 = (var.enable_mysql_proxy && var.enable_nlb ? 
       "Endpoint Service is disabled. Set enable_endpoint_service = true to enable PrivateLink." : 
       "Enable mysql_proxy and nlb first, then set enable_endpoint_service = true.")
