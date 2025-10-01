@@ -58,11 +58,23 @@ resource "aws_db_subnet_group" "rds" {
   })
 }
 
+#RDS DB Parameter Group
+resource "aws_db_parameter_group" "mysqlpg" {
+  name   = "${var.project_name}-${var.environment}-rds-parameter-group"
+  family = "mysql8.0"
+
+  parameter {
+    name  = "max_connect_errors"
+    value = "10000"
+  }
+}
+
 # RDS MySQL Instance
 resource "aws_db_instance" "mysql" {
   identifier     = "${var.project_name}-${var.environment}-mysql"
   engine         = "mysql"
   engine_version = "8.0"
+  parameter_group_name = aws_db_parameter_group.mysqlpg.name
   instance_class = var.rds_instance_class
   
   allocated_storage     = var.rds_allocated_storage
