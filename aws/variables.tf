@@ -208,6 +208,12 @@ variable "endpoint_service_allowed_principal" {
   }
 }
 
+variable "endpoint_acceptance_required" {
+  description = "Specify whether EP must be manually approved for allowed principal"
+  type        = bool
+  default     = false
+}
+
 variable "assign_public_ip_to_ec2" {
   description = "EC2 subnet placement: true = public subnet + public IP, false = private subnet + no public IP"
   type        = bool
