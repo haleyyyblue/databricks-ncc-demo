@@ -140,7 +140,7 @@ resource "aws_vpc_endpoint_service" "mysql_privatelink" {
   count = var.enable_mysql_proxy && var.enable_nlb && var.enable_endpoint_service ? 1 : 0
 
   network_load_balancer_arns   = [aws_lb.mysql_nlb[0].arn]
-  acceptance_required          = true    # Require acceptance for endpoint connections
+  acceptance_required          = var.endpoint_acceptance_required
   supported_ip_address_types   = ["ipv4"] # IPv4 support only
   
   depends_on = [
